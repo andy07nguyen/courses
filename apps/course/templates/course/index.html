@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Courses</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'course/css/main.css' %}"media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+<!-- ADD COURSES -->
+    <h1>Add a new course</h1>
+    <form class="" action="/addCourse" method="post">
+      {% csrf_token %}
+      <label for="name">Name:</label>
+      <input type="text" name="name" placeholder="Type in your name">
+      <label for="message">Description:</label>
+      <textarea name="description" rows="8" cols="80" placeholder="Description"></textarea>
+      <input type="submit" name="Submit" value="Add">
+    </form>
+<!-- DISPLAY COURSES -->
+    <h1>Courses</h1>
+    <table>
+      <tr>
+        <!-- <th>ID</th> -->
+        <th>Course Name</th>
+        <th>Description</th>
+        <th>Date Added</th>
+        <th>Actions</th>
+      </tr>
+      {% for course in courses %}
+      <tr>
+        <!-- <td>{{course.id}}</td> -->
+        <td>{{course.name}}</td>
+        <td>{{course.description}}</td>
+        <td>{{course.created_at}}</td>
+        <td><a href={% url 'remove_url' course.id %}>remove</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
